@@ -1,0 +1,79 @@
+<style>
+  #banner {
+		padding: 14em 0 12em 0;
+		background-image: url(https://wallpaperaccess.com/full/1761712.jpg);
+		background-size: cover
+		background-position: center top;
+		background-repeat: no-repeat;
+		text-align: center;
+	}
+
+
+		#banner h1 {
+			font-size: 3em;
+      -webkit-text-stroke: 0.5px black;
+			color: #25a2c3;
+			line-height: 1em;
+			margin: 0 0 0.5em 0;
+			padding: 0;
+		}
+
+		#banner p {
+			font-size: 1.25em;
+			margin-bottom: 1.75em;
+		}
+
+    #banner input {
+      color: #bbb;
+      width: 300px;
+        border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #25a2c3;
+
+    }
+
+  #banner button {
+  background-color: rgb(14, 126, 101); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+    ::-webkit-input-placeholder {
+		color: #bbb !important;
+		opacity: 1.0;
+	}
+
+</style>
+
+ <section id="banner">
+					<h1 outline="5px dotted black">What is <input id="search" placeholder="user..." style="font-size:40px;" value="" autofocus></input>watching?
+</h1>
+						<button id="myButton">Search</button>
+</section>
+
+<h1>Most recent watched anime</h1>
+<ul id='anime_list'>
+
+</ul>
+<script src="/socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+var socket = io(); 
+socket.on('new anime', function(msg) {
+            $('#anime_list').append($('<li>').text(msg));
+        });
+</script>
+<script>
+  $(document).ready(function() {
+    $("#myButton").click(function(){
+        var username = $('#search').val();
+        location.href = '/profile/' + username;
+    }); 
+});
+</script>
